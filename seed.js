@@ -39,7 +39,15 @@ const data = [
 ];
 
 async function seed() {
-  await mongoose.connect(config.get("db"));
+  await mongoose.connect(config.get("db"), {
+    useNewUrlParser: true,
+    useFindAndModify: false,
+    useUnifiedTopology:true
+  }).then(() => console.log(`Successfully connect to MongoDB 👍`))
+  .catch(err => {
+    console.error("Connection error", err);
+    process.exit();
+  });;
 
   await Movie.deleteMany({});
   await Genre.deleteMany({});
