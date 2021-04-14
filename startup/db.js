@@ -4,7 +4,8 @@ const config = require('config');
 
 module.exports = function() {
   const db = config.get('db');
-  mongoose.connect(db, {
+  console.log(db)
+  mongoose.connect(process.env.vidly_db || db, {
     useNewUrlParser: true,
     useFindAndModify: false,
     useUnifiedTopology:true
